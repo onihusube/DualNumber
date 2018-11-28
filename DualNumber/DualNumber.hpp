@@ -198,7 +198,9 @@ namespace DualNumbers {
 		* @detail À•”(a)‚ªƒ[ƒ‚Å‚È‚¢–
 		*/
 		constexpr void inverse() {
-			this->inverted();
+			//d^-1 = 1/a - b/a^2
+			m_a = T(1.0) / m_a;
+			m_b /= -(m_a* m_a);
 		}
 
 		/**
@@ -206,31 +208,31 @@ namespace DualNumbers {
 		* @brief Œ»İ•Û‚·‚é’l‚ğ‚»‚Ì‹¤–ğ‘o‘Î”‚É‚·‚é
 		*/
 		constexpr void conjugate() {
-			this->conjugated();
+			m_b = -m_b;
 		}
 
 		/**
 		* ‘o‘Î”‚Ì‹t”‚ğ“¾‚é
-		* @brief w’è‚³‚ê‚½‘o‘Î”‚Ì‹t”‚ğ‹‚ß‚é
-		* @param dual À•”(a)‚ªƒ[ƒ‚Å‚È‚¢‘o‘Î”
+		* @brief Œ»İ‚Ì‘o‘Î”‚Ì‹t”‚ğ“¾‚é
+		* @detail À•”(a)‚ªƒ[ƒ‚Å‚È‚¢‚±‚Æ
 		* @return ‹t”(1/a - b/a^2ƒÃ)
 		*/
-		constexpr this_type& inverted() {
-			//d^-1 = 1/a - b/a^2
-			m_a = T(1.0) / m_a;
-			m_b /= -(m_a* m_a);
-			return *this;
+		constexpr this_type inverted() const {
+			auto copy = *this;
+			copy.inverse();
+			return copy;
 		}
 
 		/**
 		* ‘o‘Î”‚Ì‹¤–ğ‚ğ“¾‚é
-		* @brief w’è‚³‚ê‚½‘o‘Î”‚Ì‹¤–ğ‚ğ‹‚ß‚é
+		* @brief Œ»İ‚Ì‘o‘Î”‚Ì‹¤–ğ‚ğ“¾‚é
 		* @param dual À•”(a)‚ªƒ[ƒ‚Å‚È‚¢‘o‘Î”
 		* @return ‹¤–ğ‘o‘Î”(a - bƒÃ)
 		*/
-		constexpr this_type& conjugated() {
-			m_b = -m_b;
-			return *this;
+		constexpr this_type conjugated() const {
+			auto copy = *this;
+			copy.conjugate();
+			return copy;
 		}
 		
 		/**

@@ -61,6 +61,8 @@ int main()
 
 	constexpr auto d4 = d1 + d2;
 	constexpr double a{ d4 };
+	constexpr auto inv = d4.inverted();
+	constexpr auto conj = literal3.conjugated();
 
 	constexpr std::complex<double> z{ 1.0, 2.0 };
 	constexpr DualNumbers::dual<double> fromz{ z };
@@ -78,10 +80,6 @@ int main()
 
 	std::cout << std::setprecision(16) << sqrt_n << std::endl;
 	std::cout << sqrt_2 << std::endl;
-
-
-	//auto f = []() {return 1; };
-	//constexpr auto t = f();
 }
 
 // プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー
