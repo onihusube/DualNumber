@@ -4,6 +4,7 @@
 #include "pch.h"
 #include <iostream>
 #include <iomanip>
+#include <codecvt>
 
 #include"DualNumber.hpp"
 
@@ -48,11 +49,16 @@ constexpr double sqrt_newton(double n) {
 }
 
 
+int(&retarray2())[5]{
+	static int array[]{ 2,4,6,8,10 };
+	return array;
+}
+
 int main()
 {
 	using namespace DualNumbers;
 
-	constexpr DualNumbers::dual<double> d1{ 1.0 };
+	constexpr DualNumbers::dual<double> d1{};
 	constexpr DualNumbers::dual<double> d2{ 3.0 };
 	constexpr DualNumbers::dual<double> d3 = { 1.0, 1.0 };
 	constexpr auto literal1 = 1.0_d;
@@ -61,7 +67,7 @@ int main()
 
 	constexpr auto d4 = d1 + d2;
 	constexpr double a{ d4 };
-	constexpr auto inv = d4.inverted();
+//	constexpr auto inv = d4.inverted();
 	constexpr auto conj = literal3.conjugated();
 
 	constexpr std::complex<double> z{ 1.0, 2.0 };
@@ -78,6 +84,7 @@ int main()
 	constexpr auto sqrt_n = sqrt_newton(10.0);
 	auto sqrt_2 = std::sqrt(2.0);
 
+	std::cout << literal3 << std::endl;
 	std::cout << std::setprecision(16) << sqrt_n << std::endl;
 	std::cout << sqrt_2 << std::endl;
 }

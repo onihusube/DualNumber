@@ -1,6 +1,7 @@
 #pragma once
 
 #include <complex>
+#include <cmath>
 #include <iostream>
 
 namespace DualNumbers {
@@ -351,8 +352,8 @@ namespace DualNumbers {
 		return dual<T>{lhs} /= rhs;
 	}
 
-	template<typename Char, typename Traits, typename T>
-	std::basic_ostream<Char, Traits>& operator<<(std::basic_ostream<char, Traits>& ostream, const dual<T>& rhs) {
+	template<typename T>
+	std::ostream& operator<<(std::ostream& ostream, const dual<T>& rhs) {
 		ostream << rhs.a() << " + " << rhs.b() << "e";
 		return ostream;
 	}
@@ -434,6 +435,13 @@ namespace DualNumbers {
 		auto pow(const dual<T>& d, Exponent y) {
 			using std::pow;
 			return dual<T>{pow(d.a(), y), static_cast<T>(y)*d.b()*pow(d.a(), y - T(1.0))};
+		}
+
+		template<typename T>
+		auto hypot(const dual<T>&x, const dual<T>&y) {
+			using std::hypot;
+			auto diff = sqrt(x*x + y*y);
+			return dual<T>{hypot(x.a(), y.a()), diff.b()};
 		}
 
 		template<typename T>
@@ -599,7 +607,8 @@ namespace DualNumbers {
 			return dual<T>{log2(d.a()), d.b() / (d.a() * Constant::loge_2<T>)};
 		}
 
-
+#if 201603L <= __cpp_lib_math_special_functions
+		
 		/**
 		* 各種ベッセル関数とその微分を計算する
 		* @tparam T nuの型
@@ -865,5 +874,8 @@ namespace DualNumbers {
 			dual<T> d = calculateModifiedBesselFunctions(nu, x, [](auto nu, auto x) {return cyl_bessel_kl(nu, x); });
 			return dual<T>{d.a(), -d.b()};
 		}
+
+#endif // __cpp_lib_math_special_functions
+
 	}
 }
