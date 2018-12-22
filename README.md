@@ -1,7 +1,6 @@
 # DualNumber
 
 constexprな双対数（二重数）の実装
-
 ~~~C++
 //Header only
 #include"DualNumber.hpp"
@@ -41,3 +40,6 @@ constexpr bool ltq = d1 <= d1;//true
 constexpr bool gt = d3 > d2;  //false
 constexpr bool gtq = d3 >= d2;//false
 ~~~
+[NewtonMethod Sample(SquareRoot)](https://wandbox.org/permlink/tKf7KpYzq8lLIAhs)
+
+[詳細](https://onihusube.hatenablog.com/entry/2018/12/22/173923)
