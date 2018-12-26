@@ -7,13 +7,13 @@ constexprな双対数（二重数）の実装
 
 constexpr DualNumbers::dual<double> d1{}; //{0.0, 0.0}
 constexpr DualNumbers::dual<double> d2{ 3.0 };  //{3.0, 0.0}
-constexpr DualNumbers::dual<double> d3 = { 1.0, 1.0 };  //{1.0, 0.0}
+constexpr DualNumbers::dual<double> d3 = { 1.0, 1.0 };  //{1.0, 1.0}
 
 //Arithmetic
 constexpr auto add = d1 + d2;  //{3.0, 0.0}
 constexpr auto sub = d2 - d3;  //{2.0, -1.0}
 constexpr auto mul = d2 + d3;  //{4.0, 1.0}
-constexpr auto div = d3 / d2;  //{-2.0, 1.0}
+constexpr auto div = d3 / d2;  //{0.3333..., 0.3333...}
 
 //f(x) = 4x^3 + 3x^2 + 2x + 1
 //df(x) = 12x^2 + 6x + 2
